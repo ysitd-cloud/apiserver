@@ -28,6 +28,13 @@
     optional "0.1.4"
     redis "^2.7.1"
 
+"@nestjs/swagger@^1.1.3":
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/@nestjs/swagger/-/swagger-1.1.3.tgz#1d52ff983b0414c44038b9c9a95704fbe23917ab"
+  dependencies:
+    lodash "4.17.4"
+    swagger-ui-express "2.0.11"
+
 "@nestjs/websockets@^4.0.2":
   version "4.4.1"
   resolved "https://registry.yarnpkg.com/@nestjs/websockets/-/websockets-4.4.1.tgz#bafc434108a320663756acb79a067f9602069cc9"
@@ -1390,6 +1397,10 @@ lodash.restparam@^3.0.0:
   version "3.6.1"
   resolved "https://registry.yarnpkg.com/lodash.restparam/-/lodash.restparam-3.6.1.tgz#936a4e309ef330a7645ed4145986c85ae5b20805"
 
+lodash@4.17.4:
+  version "4.17.4"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
+
 lowercase-keys@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/lowercase-keys/-/lowercase-keys-1.0.0.tgz#4e3366b39e7f5457e35f1324bdf6f88d0bfc7306"
@@ -2137,6 +2148,10 @@ supports-color@^4.0.0:
   resolved "https://registry.yarnpkg.com/supports-color/-/supports-color-4.5.0.tgz#be7a0de484dec5c5cddf8b3d59125044912f635b"
   dependencies:
     has-flag "^2.0.0"
+
+swagger-ui-express@2.0.11:
+  version "2.0.11"
+  resolved "https://registry.yarnpkg.com/swagger-ui-express/-/swagger-ui-express-2.0.11.tgz#db331cf888640a93b7a5b06111b02907a4be9c35"
 
 symbol-observable@1.0.1:
   version "1.0.1"

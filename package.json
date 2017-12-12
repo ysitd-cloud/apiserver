@@ -13,6 +13,7 @@
     "@nestjs/common": "^4.0.2",
     "@nestjs/core": "^4.0.2",
     "@nestjs/microservices": "^4.0.2",
+    "@nestjs/swagger": "^1.1.3",
     "@nestjs/websockets": "^4.0.2",
     "apollo-server-express": "^1.3.0",
     "graphql": "^0.11.7",
