@@ -33,6 +33,7 @@
     "@types/helmet": "^0.0.37",
     "@types/morgan": "^1.7.35",
     "@types/node": "^8.0.19",
+    "apollo-link": "^1.0.6",
     "nodemon": "^1.11.0",
     "ts-node": "^3.3.0",
     "tslint": "^5.8.0",

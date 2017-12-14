@@ -7,11 +7,15 @@
     "noLib": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "target": "es6",
+    "target": "es2017",
     "sourceMap": true,
     "allowJs": true,
     "outDir": "./dist",
-    "importHelpers": true
+    "importHelpers": true,
+    "lib": [
+      "es6",
+      "esnext.asynciterable"
+    ],
   },
   "include": [
     "src/**/*"
