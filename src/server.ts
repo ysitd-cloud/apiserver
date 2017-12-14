@@ -14,6 +14,7 @@ import { ApplicationModule } from './app/app.module';
     .setTitle('YSITD Cloud API')
     .setDescription('YSITD Cloud API Document')
     .setVersion('1.0')
+    .setSchemes(process.env.NODE_ENV === 'production' ? 'https': 'http')
     .build();
 
   const e = express();
