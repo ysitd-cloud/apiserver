@@ -1,3 +1,33 @@
 type Query {
     ping: String!
+    user(username: String!): User
 }
+
+type User {
+    username: String!
+    apps: [App!]
+}
+
+type App {
+    id: String!
+    owner: String!
+    name: String!
+    deployment: AppDeployment!
+    environment: [AppEnvironemntParameter!]
+    network: AppNetwork!
+}
+
+type AppDeployment {
+    image: String!
+    tag: String!
+}
+
+type AppEnvironemntParameter {
+    key: String!
+    value: String!
+}
+
+type AppNetwork {
+    domain: String!
+}
+

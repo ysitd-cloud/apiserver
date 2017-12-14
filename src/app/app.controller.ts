@@ -1,5 +1,5 @@
 import { Controller, Get, Res } from '@nestjs/common';
-import { ApiResponse, ApiOperation, ApiProduces } from '@nestjs/swagger';
+import { ApiOperation, ApiProduces, ApiResponse } from '@nestjs/swagger';
 
 @Controller()
 export class AppController {

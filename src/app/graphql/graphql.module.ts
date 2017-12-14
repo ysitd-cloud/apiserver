@@ -1,8 +1,8 @@
 import { MiddlewaresConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
+import {graphiqlExpress} from 'apollo-server-express';
+import { GraphQLMiddleware } from './graphql.middleware';
 import { GraphQLService } from './graphql.service';
 import { ResolveModule } from './resolver/resolver.module';
-import { GraphQLMiddleware } from './graphql.middleware';
-import {graphiqlExpress} from 'apollo-server-express';
 
 @Module({
   modules: [ResolveModule],
@@ -20,6 +20,6 @@ export class GraphQLModule implements NestModule {
     consumer.apply(GraphQLMiddleware).forRoutes({
       path: '/graphql',
       method: RequestMethod.ALL,
-    })
+    });
   }
 }

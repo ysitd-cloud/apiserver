@@ -3,11 +3,11 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 import { NestFactory } from '@nestjs/core';
-import { ApplicationModule } from './app/app.module';
-import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
-import * as morgan from 'morgan';
-import * as helmet from 'helmet';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import * as express from 'express';
+import * as helmet from 'helmet';
+import * as morgan from 'morgan';
+import { ApplicationModule } from './app/app.module';
 
 (async () => {
   const options = new DocumentBuilder()

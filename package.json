@@ -16,6 +16,7 @@
     "@nestjs/swagger": "^1.1.3",
     "@nestjs/websockets": "^4.0.2",
     "apollo-server-express": "^1.3.0",
+    "axios": "^0.17.1",
     "dotenv": "^4.0.0",
     "graphql": "^0.11.7",
     "graphql-tools": "^2.12.0",

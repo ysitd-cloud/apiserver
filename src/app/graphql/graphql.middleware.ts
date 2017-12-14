@@ -1,7 +1,7 @@
 import { ExpressMiddleware, Middleware, NestMiddleware } from '@nestjs/common';
 import { graphqlExpress } from 'apollo-server-express';
-import { GraphQLService } from './graphql.service';
 import { IS_PRODUCTION } from '../constants';
+import { GraphQLService } from './graphql.service';
 
 @Middleware()
 export class GraphQLMiddleware implements NestMiddleware {

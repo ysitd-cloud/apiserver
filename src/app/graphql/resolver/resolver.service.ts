@@ -1,17 +1,19 @@
 import { Component } from '@nestjs/common';
-import { IResolverObject, IResolvers } from 'graphql-tools/dist/Interfaces';
+import { IResolvers } from 'graphql-tools/dist/Interfaces';
+import { QueryResolver } from './query.resolver';
+import { UserResolver } from './user.resolver';
 
 @Component()
 export class ResolverService {
-    getResolver(): IResolvers {
-        return {
-            Query: this.getQueryResolver(),
-        };
-    }
+  constructor(
+    private readonly query: QueryResolver,
+    private readonly user: UserResolver,
+  ) {}
 
-    private getQueryResolver(): IResolverObject {
-        return {
-            ping() { return 'pong'; },
-        };
-    }
+  getResolver(): IResolvers {
+    return {
+      Query: this.query.getResolver(),
+      User: this.user.getResolver(),
+    };
+  }
 }

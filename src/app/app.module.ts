@@ -1,9 +1,10 @@
 import { Module } from '@nestjs/common';
-import { GraphQLModule } from './graphql/graphql.module';
 import { AppController } from './app.controller';
+import { DeployerModule } from './deployer/deployer.module';
+import { GraphQLModule } from './graphql/graphql.module';
 
 @Module({
-  modules: [GraphQLModule],
+  modules: [GraphQLModule, DeployerModule],
   controllers: [AppController],
 })
 export class ApplicationModule {}

@@ -1,6 +1,6 @@
 import { Component } from '@nestjs/common';
 import * as fs from 'fs';
-import {GraphQLSchema} from 'graphql';
+import { GraphQLSchema } from 'graphql';
 import { makeExecutableSchema } from 'graphql-tools';
 import { ResolverService } from './resolver/resolver.service';
 
