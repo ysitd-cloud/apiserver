@@ -20,6 +20,6 @@ export class GraphQLService {
   }
 
   private getTypeDefs(): string {
-    return fs.readFileSync(`${__dirname}/graphql.graphqls`, 'utf8');
+    return fs.readFileSync('./graphql.graphqls', 'utf8');
   }
 }
