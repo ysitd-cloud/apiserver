@@ -3,7 +3,7 @@ import { ApiModelProperty, ApiOperation, ApiProduces, ApiResponse } from '@nestj
 
 class Endpoint {
   @ApiModelProperty({ required: true, type: String, isArray: true, description: 'List of API endpoint'})
-  readonly path: string[]
+  readonly path: string[];
 }
 
 @Controller()
@@ -24,7 +24,7 @@ export class AppController {
 
         '/app',
       ].sort(),
-    }
+    };
   }
 
   @Get('ping')
