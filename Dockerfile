@@ -4,8 +4,10 @@ COPY . /app
 
 WORKDIR /app
 
-RUN yarn install --puru-lockfile && \
+RUN apk add --no-cache git && \
+    yarn install --pure-lockfile && \
     yarn build && \
-    yarn install --production
+    yarn install --production && \
+    yarn del git
 
 CMD ["yarn", "start"]
