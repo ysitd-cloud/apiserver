@@ -15,6 +15,10 @@
     "lib": [
       "es6",
       "esnext.asynciterable"
+    ],
+    "typeRoots": [
+      "node_modules/@types",
+      "types"
     ]
   },
   "include": [
