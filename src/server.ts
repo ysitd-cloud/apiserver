@@ -9,6 +9,7 @@ import * as helmet from 'helmet';
 import * as morgan from 'morgan';
 import * as cors from 'cors';
 import { ApplicationModule } from './app/app.module';
+import { OpenAPIModule } from './openapi/openapi.module';
 
 (async () => {
   const options = new DocumentBuilder()
@@ -27,5 +28,7 @@ import { ApplicationModule } from './app/app.module';
   const app = await NestFactory.create(ApplicationModule, e);
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('/swagger', app, document);
+  OpenAPIModule.setup('/openapi', app, document);
+
   await app.listen(parseInt(process.env.PORT, 10) || 8080);
 })();
