@@ -1,4 +1,4 @@
-import {ExpressMiddleware, Middleware, NestMiddleware, UnauthorizedException} from '@nestjs/common';
+import { ExpressMiddleware, Middleware, NestMiddleware, UnauthorizedException } from '@nestjs/common';
 import * as moment from 'moment';
 import { AccountService } from '../account/account.service';
 
@@ -7,7 +7,6 @@ export class TokenMiddleware implements NestMiddleware {
   constructor(private readonly service: AccountService) {}
 
   resolve(): ExpressMiddleware {
-
     return (req, res, next) => {
       const header = req.get('Authorization');
       if (!header) {
