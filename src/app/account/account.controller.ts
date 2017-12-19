@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Response } from '@nestjs/common';
+import { Controller, Get, NotFoundException, Param } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiUseTags } from '@nestjs/swagger';
 import { DeployerService } from '../deployer/deployer.service';
 import { UserApp } from '../deployer/interfaces';
@@ -20,14 +20,13 @@ export class AccountController {
   })
   @ApiResponse({ status: 200, description: 'Get user information', type: User })
   @ApiResponse({ status: 404, description: 'User not exists' })
-  async getUserInfo(@Param('username') username: string, @Response() resp) {
+  async getUserInfo(@Param('username') username: string) {
     const user = await this.service.getUserInfo(username);
     if (user !== null) {
-      resp.json(user);
+      return user;
     } else {
-      resp.status(404);
+      throw new NotFoundException();
     }
-    resp.end();
   }
 
   @Get(':username/app')
