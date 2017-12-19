@@ -15,6 +15,7 @@ import { ApplicationModule } from './app/app.module';
     .setDescription('YSITD Cloud API Document')
     .setVersion('1.0')
     .setSchemes(process.env.NODE_ENV === 'production' ? 'https' : 'http')
+    .addBearerAuth()
     .build();
 
   const e = express();

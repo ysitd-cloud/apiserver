@@ -1,19 +1,23 @@
 import { Component } from '@nestjs/common';
-import * as fs from 'fs';
 import { credentials } from 'grpc';
-import { GetUserInfoReply, GetUserInfoRequest } from 'ysitd-cloud-interfaces/account/actions/account_pb';
+import {
+  GetTokenInfoReply,
+  GetTokenInfoRequest,
+  GetUserInfoReply,
+  GetUserInfoRequest,
+} from 'ysitd-cloud-interfaces/account/actions/account_pb';
 import { AccountClient } from 'ysitd-cloud-interfaces/account/grpc_grpc_pb';
 import { ConfigService } from '../config/config.service';
-import { User as IUser } from './interfaces';
-import { User } from './swagger';
+import { GrpcTransformService } from './grpc.transform.service';
+import { Token as IToken, User as IUser } from './interfaces';
 
 @Component()
 export class AccountService {
   private client: AccountClient = null;
 
-  constructor(private readonly config: ConfigService) {}
+  constructor(private readonly config: ConfigService, private readonly transform: GrpcTransformService) {}
 
-  async getUserInfo(username: string): Promise<IUser> {
+  async getUserInfo(username: string): Promise<IUser | null> {
     const client = this.getClient();
     const req = new GetUserInfoRequest();
     req.setUsername(username);
@@ -25,15 +29,27 @@ export class AccountService {
           if (!reply.getExists()) {
             resolve(null);
           } else {
-            const u = reply.getUser();
-            const user = new User();
-            user.username = u.getUsername();
-            user.displayName = u.getDisplayName();
-            user.email = u.getEmail();
-            user.avatarUrl = u.getAvatarUrl();
-            resolve(user);
+            resolve(this.transform.decodeUser(reply.getUser()));
           }
         }
+      });
+    });
+  }
+
+  async getTokenInfo(token: string): Promise<IToken | null> {
+    const client = this.getClient();
+    const req = new GetTokenInfoRequest();
+    req.setToken(token);
+    return new Promise<IToken>((resolve, reject) => {
+      client.getTokenInfo(req, (e: Error | null, reply: GetTokenInfoReply) => {
+        if (e) {
+          reject(e);
+          return;
+        } else if (!reply.getExists()) {
+          resolve(null);
+        }
+
+        resolve(this.transform.decodeToken(reply.getToken()));
       });
     });
   }
@@ -47,8 +63,6 @@ export class AccountService {
   }
 
   private createClient() {
-    const cert = fs.readFileSync(this.config.get('account.ca'));
-    const cred = credentials.createSsl(cert);
     this.client = new AccountClient(this.config.get('account.endpoint'), credentials.createInsecure());
   }
 }

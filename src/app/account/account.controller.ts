@@ -1,13 +1,16 @@
-import { Controller, Get, NotFoundException, Param } from '@nestjs/common';
-import { ApiOperation, ApiResponse, ApiUseTags } from '@nestjs/swagger';
+import { Controller, Get, NotFoundException, Param, UseGuards } from '@nestjs/common';
+import { ApiBearerAuth, ApiOperation, ApiResponse, ApiUseTags} from '@nestjs/swagger';
 import { DeployerService } from '../deployer/deployer.service';
 import { UserApp } from '../deployer/interfaces';
 import { Application } from '../deployer/swagger';
 import { AccountService } from './account.service';
 import { User } from './swagger';
+import { TokenGuard } from './token.guard';
 
 @ApiUseTags('apps')
+@ApiBearerAuth()
 @Controller('user')
+@UseGuards(TokenGuard)
 export class AccountController {
   constructor(
     private readonly service: AccountService,
