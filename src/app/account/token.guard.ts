@@ -19,6 +19,7 @@ export class TokenGuard implements CanActivate {
 
     const info = await this.service.getTokenInfo(token);
     if (info !== null && (moment().isBefore(info.expire))) {
+      (req as any).token = info;
       return true;
     }
 
