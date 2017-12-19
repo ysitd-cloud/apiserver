@@ -7,7 +7,7 @@ import { AccountService } from './account.service';
 import { User } from './swagger';
 import { TokenGuard } from './token.guard';
 
-@ApiUseTags('apps')
+@ApiUseTags('user')
 @ApiBearerAuth()
 @Controller('user')
 @UseGuards(TokenGuard)
