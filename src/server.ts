@@ -7,6 +7,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import * as express from 'express';
 import * as helmet from 'helmet';
 import * as morgan from 'morgan';
+import * as cors from 'cors';
 import { ApplicationModule } from './app/app.module';
 
 (async () => {
@@ -21,6 +22,7 @@ import { ApplicationModule } from './app/app.module';
   const e = express();
   e.use(morgan('dev'));
   e.use(helmet());
+  e.use(cors());
 
   const app = await NestFactory.create(ApplicationModule, e);
   const document = SwaggerModule.createDocument(app, options);
