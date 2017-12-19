@@ -4,16 +4,15 @@ export class OpenAPITransformer {
   createObject(document: SwaggerDocument) {
     const host = document.host || process.env.HOSTNAME || 'localhost';
 
-    const docPaths = document.paths;
-    const paths = Object.keys(docPaths).reduce((obj, path) => {
-      const content = docPaths[path];
-      obj[path] = this.transformPath(content);
-      return obj;
+    const paths = Object.keys(document.paths).reduce((p, path) => {
+      const content = document.paths[path];
+      p[path] = this.transformPath(content);
+      return p;
     }, {});
 
-    const schemas = Object.keys(document.definitions).reduce((obj, name) => {
-      obj[name] = this.transformDefinition(document.definitions[name]);
-      return obj;
+    const schemas = Object.keys(document.definitions).reduce((s, name) => {
+      s[name] = this.transformDefinition(document.definitions[name]);
+      return s;
     }, {});
 
     const obj: any = {
@@ -26,8 +25,8 @@ export class OpenAPITransformer {
             description: 'The scheme for access API',
             enum: document.schemes,
             default: document.schemes[0],
-          }
-        }
+          },
+        },
       }],
       paths,
       components: {
@@ -81,15 +80,15 @@ export class OpenAPITransformer {
     return Object.keys(content).reduce((obj, method) => {
       obj[method] = this.transformMethod(content[method]);
       return obj;
-    }, {})
+    }, {});
   }
 
   private transformMethod(content): object {
     const obj: any = {
       summary: content.summary,
-      responses: Object.keys(content.responses).reduce((obj, code) => {
-        obj[code] = this.transformResponse(content.responses[code], content);
-        return obj;
+      responses: Object.keys(content.responses).reduce((o, code) => {
+        o[code] = this.transformResponse(content.responses[code], content);
+        return o;
       }, {}),
     };
 
@@ -113,7 +112,6 @@ export class OpenAPITransformer {
       description: response.description,
     };
 
-
     if (response.type) {
       obj.content = {
         [method.produces[0]]: {
@@ -130,12 +128,12 @@ export class OpenAPITransformer {
       return {
         type: 'array',
         items: {
-          '$ref': this.transformDefinitionPath(schema.items.$ref),
+          $ref: this.transformDefinitionPath(schema.items.$ref),
         },
       };
     } else {
       return {
-        '$ref': this.transformDefinitionPath(schema.$ref),
+        $ref: this.transformDefinitionPath(schema.$ref),
       };
     }
   }

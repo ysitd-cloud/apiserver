@@ -1,8 +1,8 @@
 import { INestApplication } from '@nestjs/common';
 import { SwaggerDocument } from '@nestjs/swagger/interfaces';
 import { Router } from 'express';
-import { OpenAPITransformer } from './transformer';
 import { safeDump } from 'js-yaml';
+import { OpenAPITransformer } from './transformer';
 
 export class OpenAPIModule {
   static setup(path: string, app: INestApplication, document: SwaggerDocument) {

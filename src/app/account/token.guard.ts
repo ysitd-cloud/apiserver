@@ -1,6 +1,6 @@
 import { CanActivate, ExecutionContext, Guard } from '@nestjs/common';
 import { Request } from 'express';
-import moment = require('moment');
+import * as moment from 'moment';
 import {AccountService} from './account.service';
 
 @Guard()

@@ -4,10 +4,10 @@ dotenv.config();
 
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import * as cors from 'cors';
 import * as express from 'express';
 import * as helmet from 'helmet';
 import * as morgan from 'morgan';
-import * as cors from 'cors';
 import { ApplicationModule } from './app/app.module';
 import { OpenAPIModule } from './openapi/openapi.module';
 
