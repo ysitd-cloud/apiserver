@@ -3,16 +3,16 @@
 
 
 "@nestjs/common@^4.0.2":
-  version "4.5.1"
-  resolved "https://registry.yarnpkg.com/@nestjs/common/-/common-4.5.1.tgz#36c9ead2987be56d5ecc78de58220857c651b103"
+  version "4.5.2"
+  resolved "https://registry.yarnpkg.com/@nestjs/common/-/common-4.5.2.tgz#cbe6f97b8f2b74310fb8ead4311b8c5cf1bf00d4"
   dependencies:
     class-transformer "0.1.8"
     class-validator "0.7.3"
     cli-color "1.1.0"
 
 "@nestjs/core@^4.0.2":
-  version "4.5.1"
-  resolved "https://registry.yarnpkg.com/@nestjs/core/-/core-4.5.1.tgz#f38c3582d6e7d9bc6e5b266d345fa00e89652ebf"
+  version "4.5.2"
+  resolved "https://registry.yarnpkg.com/@nestjs/core/-/core-4.5.2.tgz#5eff62117e30d9c5459d00377686ee15ad325894"
   dependencies:
     body-parser "1.17.2"
     express "4.16.2"
@@ -20,8 +20,8 @@
     optional "0.1.4"
 
 "@nestjs/microservices@^4.0.2":
-  version "4.5.1"
-  resolved "https://registry.yarnpkg.com/@nestjs/microservices/-/microservices-4.5.1.tgz#05c4e2c57e23e012847e868946af4458fa976f33"
+  version "4.5.2"
+  resolved "https://registry.yarnpkg.com/@nestjs/microservices/-/microservices-4.5.2.tgz#0426bf2d264963a5669e631da7ab295b40fd2c16"
   dependencies:
     iterare "0.0.8"
     json-socket "^0.2.1"
@@ -36,8 +36,8 @@
     swagger-ui-express "2.0.11"
 
 "@nestjs/websockets@^4.0.2":
-  version "4.5.1"
-  resolved "https://registry.yarnpkg.com/@nestjs/websockets/-/websockets-4.5.1.tgz#99a3d508e49af36ad7262697f3154e1cdfca2fee"
+  version "4.5.2"
+  resolved "https://registry.yarnpkg.com/@nestjs/websockets/-/websockets-4.5.2.tgz#1a4254f027991592ee7a41cd586b7393a1bc0d1b"
   dependencies:
     iterare "0.0.8"
     socket.io "^2.0.3"
@@ -113,6 +113,14 @@
   dependencies:
     "@types/express-serve-static-core" "*"
     "@types/mime" "*"
+
+"@types/strip-bom@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@types/strip-bom/-/strip-bom-3.0.0.tgz#14a8ec3956c2e81edb7520790aecf21c290aebd2"
+
+"@types/strip-json-comments@0.0.30":
+  version "0.0.30"
+  resolved "https://registry.yarnpkg.com/@types/strip-json-comments/-/strip-json-comments-0.0.30.tgz#9aa30c04db212a9a0649d6ae6fd50accc40748a1"
 
 "@types/zen-observable@0.5.3":
   version "0.5.3"
@@ -260,9 +268,9 @@ array-unique@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/array-unique/-/array-unique-0.2.1.tgz#a1d97ccafcbc2625cc70fadceb36a50c58b01a53"
 
-arraybuffer.slice@0.0.6:
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/arraybuffer.slice/-/arraybuffer.slice-0.0.6.tgz#f33b2159f0532a3f3107a272c0ccfbd1ad2979ca"
+arraybuffer.slice@~0.0.7:
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/arraybuffer.slice/-/arraybuffer.slice-0.0.7.tgz#3bbc4275dd584cc1b10809b89d4e8b63a69e7675"
 
 arrify@^1.0.0:
   version "1.0.1"
@@ -485,7 +493,7 @@ chalk@^1.1.3:
     strip-ansi "^3.0.0"
     supports-color "^2.0.0"
 
-chalk@^2.0.0, chalk@^2.0.1, chalk@^2.1.0:
+chalk@^2.0.1, chalk@^2.1.0, chalk@^2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/chalk/-/chalk-2.3.0.tgz#b5ea48efc9c1793dccc9b4767c93914d3f2d52ba"
   dependencies:
@@ -806,11 +814,11 @@ engine.io-client@~3.1.0:
     yeast "0.1.2"
 
 engine.io-parser@~2.1.0, engine.io-parser@~2.1.1:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/engine.io-parser/-/engine.io-parser-2.1.1.tgz#e0fb3f0e0462f7f58bb77c1a52e9f5a7e26e4668"
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/engine.io-parser/-/engine.io-parser-2.1.2.tgz#4c0f4cff79aaeecbbdcfdea66a823c6085409196"
   dependencies:
     after "0.8.2"
-    arraybuffer.slice "0.0.6"
+    arraybuffer.slice "~0.0.7"
     base64-arraybuffer "0.1.5"
     blob "0.0.4"
     has-binary2 "~1.0.2"
@@ -1598,8 +1606,8 @@ make-dir@^1.0.0:
     pify "^3.0.0"
 
 make-error@^1.1.1:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/make-error/-/make-error-1.3.0.tgz#52ad3a339ccf10ce62b4040b708fe707244b8b96"
+  version "1.3.2"
+  resolved "https://registry.yarnpkg.com/make-error/-/make-error-1.3.2.tgz#8762ffad2444dd8ff1f7c819629fa28e24fea1c4"
 
 map-stream@~0.1.0:
   version "0.1.0"
@@ -1736,8 +1744,8 @@ node-pre-gyp@^0.6.39:
     tar-pack "^3.4.0"
 
 nodemon@^1.11.0:
-  version "1.14.1"
-  resolved "https://registry.yarnpkg.com/nodemon/-/nodemon-1.14.1.tgz#f43447d99cfacc586316b38b456a3ffb4537914f"
+  version "1.14.5"
+  resolved "https://registry.yarnpkg.com/nodemon/-/nodemon-1.14.5.tgz#0fc1ad9f325f7923d71c3f0ab0da1c6ba46822e5"
   dependencies:
     chokidar "^1.7.0"
     debug "^2.6.8"
@@ -2139,8 +2147,8 @@ rimraf@2, rimraf@^2.5.1, rimraf@^2.6.1:
     glob "^7.0.5"
 
 rxjs@^5.4.3:
-  version "5.5.5"
-  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-5.5.5.tgz#e164f11d38eaf29f56f08c3447f74ff02dd84e97"
+  version "5.5.6"
+  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-5.5.6.tgz#e31fb96d6fd2ff1fd84bcea8ae9c02d007179c02"
   dependencies:
     symbol-observable "1.0.1"
 
@@ -2262,21 +2270,11 @@ socket.io@^2.0.3:
     socket.io-client "2.0.4"
     socket.io-parser "~3.1.1"
 
-source-map-support@^0.4.0:
-  version "0.4.18"
-  resolved "https://registry.yarnpkg.com/source-map-support/-/source-map-support-0.4.18.tgz#0286a6de8be42641338594e97ccea75f0a2c585f"
-  dependencies:
-    source-map "^0.5.6"
-
 source-map-support@^0.5.0:
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/source-map-support/-/source-map-support-0.5.0.tgz#2018a7ad2bdf8faf2691e5fddab26bed5a2bacab"
   dependencies:
     source-map "^0.6.0"
-
-source-map@^0.5.6:
-  version "0.5.7"
-  resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.5.7.tgz#8a039d2d1021d22d1ea14c80d8ea468ba2ef3fcc"
 
 source-map@^0.6.0:
   version "0.6.1"
@@ -2445,25 +2443,27 @@ tough-cookie@~2.3.0:
   dependencies:
     punycode "^1.4.1"
 
-ts-node@^3.3.0:
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/ts-node/-/ts-node-3.3.0.tgz#c13c6a3024e30be1180dd53038fc209289d4bf69"
+ts-node@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/ts-node/-/ts-node-4.1.0.tgz#36d9529c7b90bb993306c408cd07f7743de20712"
   dependencies:
     arrify "^1.0.0"
-    chalk "^2.0.0"
+    chalk "^2.3.0"
     diff "^3.1.0"
     make-error "^1.1.1"
     minimist "^1.2.0"
     mkdirp "^0.5.1"
-    source-map-support "^0.4.0"
-    tsconfig "^6.0.0"
+    source-map-support "^0.5.0"
+    tsconfig "^7.0.0"
     v8flags "^3.0.0"
     yn "^2.0.0"
 
-tsconfig@^6.0.0:
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/tsconfig/-/tsconfig-6.0.0.tgz#6b0e8376003d7af1864f8df8f89dd0059ffcd032"
+tsconfig@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/tsconfig/-/tsconfig-7.0.0.tgz#84538875a4dc216e5c4a5432b3a4dec3d54e91b7"
   dependencies:
+    "@types/strip-bom" "^3.0.0"
+    "@types/strip-json-comments" "0.0.30"
     strip-bom "^3.0.0"
     strip-json-comments "^2.0.0"
 
@@ -2488,8 +2488,8 @@ tslint@^5.8.0:
     tsutils "^2.12.1"
 
 tsutils@^2.12.1:
-  version "2.13.1"
-  resolved "https://registry.yarnpkg.com/tsutils/-/tsutils-2.13.1.tgz#d6d1cc0f7c04cf9fb3b28a292973cffb9cfbe09a"
+  version "2.14.0"
+  resolved "https://registry.yarnpkg.com/tsutils/-/tsutils-2.14.0.tgz#bc5291622aa2448c1baffc544bcc14ecfa528fb7"
   dependencies:
     tslib "^1.8.0"
 
