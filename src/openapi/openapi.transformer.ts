@@ -1,9 +1,7 @@
 import { SwaggerDocument } from '@nestjs/swagger/interfaces';
 
 export class OpenAPITransformer {
-  createObject(document: SwaggerDocument) {
-    const host = document.host || process.env.HOSTNAME || 'localhost';
-
+  createOpenAPIObject(document: SwaggerDocument, host: string) {
     const paths = Object.keys(document.paths).reduce((p, path) => {
       const content = document.paths[path];
       p[path] = this.transformPath(content);
@@ -15,7 +13,7 @@ export class OpenAPITransformer {
       return s;
     }, {});
 
-    const obj: any = {
+    const obj: {[key: string]: any} = {
       openapi: '3.0.0',
       info: document.info,
       servers: [{
