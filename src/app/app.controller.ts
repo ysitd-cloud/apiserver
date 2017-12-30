@@ -22,7 +22,7 @@ export class AppController {
         '/graphql',
         '/swagger',
 
-        '/app',
+        '/user',
       ].sort(),
     };
   }
