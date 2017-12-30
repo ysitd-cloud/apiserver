@@ -20,7 +20,9 @@ export class AppController {
         '/ping',
 
         '/graphql',
+
         '/swagger',
+        '/openapi',
 
         '/user',
       ].sort(),

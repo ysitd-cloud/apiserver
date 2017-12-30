@@ -4,6 +4,7 @@ import { Router } from 'express';
 import { safeDump } from 'js-yaml';
 import { OpenAPITransformer } from './openapi.transformer';
 import SwaggerTransformer from './swagger.transformer';
+import { jsonFormatter } from '../app/middlewares/json.formatter.middleware';
 
 export class OpenAPIModule {
   static setup(path: string, app: INestApplication, document: SwaggerDocument) {
@@ -11,6 +12,7 @@ export class OpenAPIModule {
     const swagger = new SwaggerTransformer();
 
     const router = Router();
+    router.use(jsonFormatter);
     router.get('/swagger.json', (req, res) => {
       res.json(swagger.createSwaggerObject(document, req.get('Host')));
       res.end();
