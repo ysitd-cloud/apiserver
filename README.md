@@ -1,15 +1,31 @@
-# Nest framework TypeScript starter
+# YSITD Cloud API Server 
 
-Starter repository for [Nest](https://github.com/kamilmysliwiec/nest) framework.
+Public API Server for YSITD Cloud. Build with [Nest.js](nestjs.com).
 
-### Installation
+## Installation
 
+```bash
+yarn install
 ```
-$ npm install
+
+## Start Development Server
+```bash
+yarn setup:frontend
+yarn setup:backend
+yarn dev
 ```
 
-### Start
+## Start Production Server
 
+```bash
+yarn build
+yarn start
 ```
-$ npm run start
-```
+
+## Environment Variable
+
+| Variable            | Description                              |
+|---------------------|------------------------------------------|
+| `DEPLOYER_ENDPOINT` | Http Access Endpoint for deployer        |
+| `PORT`              | Port for service to listen               |
+| `ACCOUNT_ENDPOINT`  | Grpc Endpoint for access account service |
