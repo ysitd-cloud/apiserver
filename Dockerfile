@@ -8,6 +8,6 @@ RUN apk add --no-cache git && \
     yarn install --pure-lockfile && \
     yarn build && \
     yarn install --production && \
-    yarn del git
+    apk del git
 
 CMD ["yarn", "start"]
