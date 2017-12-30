@@ -1,7 +1,7 @@
-import { Request, Response, NextFunction } from 'express';
+import { NextFunction, Request, Response } from 'express';
 
 export function jsonFormatter(req: Request, res: Response, next: NextFunction) {
-  res.json = function (body) {
+  res.json = (body) => {
     if (!res.get('Content-Type')) {
       res.set('Content-Type', 'application/json');
     }

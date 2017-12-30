@@ -2,9 +2,9 @@ import { INestApplication } from '@nestjs/common';
 import { SwaggerDocument } from '@nestjs/swagger/interfaces';
 import { Router } from 'express';
 import { safeDump } from 'js-yaml';
+import { jsonFormatter } from '../app/middlewares/json.formatter.middleware';
 import { OpenAPITransformer } from './openapi.transformer';
 import SwaggerTransformer from './swagger.transformer';
-import { jsonFormatter } from '../app/middlewares/json.formatter.middleware';
 
 export class OpenAPIModule {
   static setup(path: string, app: INestApplication, document: SwaggerDocument) {
@@ -21,7 +21,7 @@ export class OpenAPIModule {
           '/swagger.yaml',
           '/openapi.json',
           '/openapi.yaml',
-        ].sort().map(path => `/openapi${path}`),
+        ].sort().map(uri => `/openapi${uri}`),
       });
       res.end();
     });
@@ -36,7 +36,6 @@ export class OpenAPIModule {
       const yaml = safeDump(swagger.createSwaggerObject(document, req.get('Host')));
       res.end(yaml);
     });
-
 
     router.get('/openapi.json', (req, res) => {
       res.json(transformer.createOpenAPIObject(document, req.get('Host')));

@@ -18,18 +18,18 @@ export default class SwaggerTransformer {
     return Object.keys(definitions).reduce((obj, name) => {
       obj[name] = this.transformDefinition(definitions[name]);
       return obj;
-    }, {})
+    }, {});
   }
 
   private transformDefinition(definition) {
     const required = Object.keys(definition.properties)
       .filter(property => 'required' in definition.properties[property] && definition.properties[property].required);
 
-    const properties = Object.keys(definition.properties).reduce((obj, name) => {
+    const properties = Object.keys(definition.properties).reduce((o, name) => {
       const property = definition.properties[name];
       delete property.required;
-      obj[name] = property;
-      return obj;
+      o[name] = property;
+      return o;
     }, {});
     const obj: {[key: string]: any} = {
       properties,
@@ -48,7 +48,7 @@ export default class SwaggerTransformer {
     return Object.keys(paths).reduce((obj, key) => {
       obj[key] = this.transformPath(paths[key]);
       return obj;
-    }, {})
+    }, {});
   }
 
   private transformPath(path) {
