@@ -13,8 +13,6 @@ import { Token as IToken, User as IUser } from './interfaces';
 
 @Component()
 export class AccountService {
-  private client: AccountClient = null;
-
   constructor(private readonly config: ConfigService, private readonly transform: GrpcTransformService) {}
 
   async getUserInfo(username: string): Promise<IUser | null> {
@@ -23,6 +21,7 @@ export class AccountService {
     req.setUsername(username);
     return new Promise<IUser>((resolve, reject) => {
       client.getUserInfo(req, (e: Error | null, reply: GetUserInfoReply) => {
+        client.close();
         if (e) {
           reject(e);
         } else {
@@ -42,6 +41,7 @@ export class AccountService {
     req.setToken(token);
     return new Promise<IToken>((resolve, reject) => {
       client.getTokenInfo(req, (e: Error | null, reply: GetTokenInfoReply) => {
+        client.close();
         if (e) {
           reject(e);
           return;
@@ -55,14 +55,6 @@ export class AccountService {
   }
 
   private getClient(): AccountClient {
-    if (this.client === null) {
-      this.createClient();
-    }
-
-    return this.client;
-  }
-
-  private createClient() {
-    this.client = new AccountClient(this.config.get('account.endpoint'), credentials.createInsecure());
+    return new AccountClient(this.config.get('account.endpoint'), credentials.createInsecure());
   }
 }
