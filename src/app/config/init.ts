@@ -11,5 +11,4 @@ function initDeployer(config: ConfigService) {
 
 function initAccount(config: ConfigService) {
   config.set('account.endpoint', process.env.ACCOUNT_ENDPOINT);
-  config.set('account.ca', `${process.env.ACCOUNT_CA_PATH}/ca.crt`);
 }
