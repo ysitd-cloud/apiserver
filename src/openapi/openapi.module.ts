@@ -13,6 +13,19 @@ export class OpenAPIModule {
 
     const router = Router();
     router.use(jsonFormatter);
+
+    router.get('/', (req, res) => {
+      res.json({
+        path: [
+          '/swagger.json',
+          '/swagger.yaml',
+          '/openapi.json',
+          '/openapi.yaml',
+        ].sort().map(path => `/openapi${path}`),
+      });
+      res.end();
+    });
+
     router.get('/swagger.json', (req, res) => {
       res.json(swagger.createSwaggerObject(document, req.get('Host')));
       res.end();
