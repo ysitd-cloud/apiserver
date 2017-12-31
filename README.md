@@ -24,8 +24,8 @@ yarn start
 
 ## Environment Variable
 
-| Variable            | Description                              |
-|---------------------|------------------------------------------|
-| `DEPLOYER_ENDPOINT` | Http Access Endpoint for deployer        |
-| `PORT`              | Port for service to listen               |
-| `ACCOUNT_ENDPOINT`  | Grpc Endpoint for access account service |
+| Variable            | Description                                 |
+|---------------------|---------------------------------------------|
+| `DEPLOYER_ENDPOINT` | Http Access Endpoint for deployer           |
+| `PORT`              | Port for service to listen                  |
+| `ACCOUNT_ENDPOINT`  | RESTful Endpoint for access account service |
