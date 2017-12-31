@@ -2,12 +2,11 @@ import { Component } from '@nestjs/common';
 import axios from 'axios';
 import * as moment from 'moment';
 import { ConfigService } from '../config/config.service';
-import { GrpcTransformService } from './grpc.transform.service';
 import { Token as IToken, User as IUser } from './interfaces';
 
 @Component()
 export class AccountService {
-  constructor(private readonly config: ConfigService, private readonly transform: GrpcTransformService) {}
+  constructor(private readonly config: ConfigService) {}
 
   async getUserInfo(username: string): Promise<IUser | null> {
     const { data } = await axios.get(`http://${this.getHostname()}/user/${username}`);
