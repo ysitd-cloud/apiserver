@@ -13,6 +13,7 @@
   "dependencies": {
     "@nestjs/common": "^4.0.2",
     "@nestjs/core": "^4.0.2",
+    "@nestjs/graphql": "^2.0.0",
     "@nestjs/microservices": "^4.0.2",
     "@nestjs/swagger": "^1.1.3",
     "@nestjs/websockets": "^4.0.2",
@@ -31,7 +32,7 @@
     "reflect-metadata": "^0.1.10",
     "rxjs": "^5.4.3",
     "tslib": "^1.8.1",
-    "ysitd-cloud-interfaces": "https://github.com/ysitd-cloud/grpc-schema.git#a80cba395572fbdc4b6cc63d9f54c5ab9f3be7ab"
+    "ysitd-cloud-interfaces": "https://github.com/ysitd-cloud/grpc-schema.git#34a74f3c309844815fd39ee3c0cfc2cdd2cc87ee"
   },
   "devDependencies": {
     "@types/cors": "^2.8.3",
