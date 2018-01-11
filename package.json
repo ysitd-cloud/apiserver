@@ -13,6 +13,7 @@
   "dependencies": {
     "@nestjs/common": "^4.0.2",
     "@nestjs/core": "^4.0.2",
+    "@nestjs/graphql": "^2.0.0",
     "@nestjs/microservices": "^4.0.2",
     "@nestjs/swagger": "^1.1.3",
     "@nestjs/websockets": "^4.0.2",

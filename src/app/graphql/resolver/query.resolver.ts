@@ -6,9 +6,9 @@ import { User } from '../../account/interfaces';
 export class QueryResolver {
   constructor(private readonly service: AccountService) {}
 
-  @Query()
-  user(_, { username }: { username: string }): Promise<User> {
-    return this.service.getUserInfo(username);
+  @Query('user')
+  getUser(_, { username }: { username: string}): Promise<User> {
+     return this.service.getUserInfo(username);
   }
 
   @Query()

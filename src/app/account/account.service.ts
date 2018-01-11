@@ -14,7 +14,14 @@ export class AccountService {
       return null;
     }
 
-    return data.user as IUser;
+    const { user } = data;
+
+    return {
+      username: user.username,
+      displayName: user.display_name,
+      email: user.email,
+      avatarUrl: user.avatar_url,
+    };
   }
 
   async getTokenInfo(code: string): Promise<IToken | null> {

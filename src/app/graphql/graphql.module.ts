@@ -1,10 +1,10 @@
 import { MiddlewaresConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
 import { MetadataScanner } from '@nestjs/core/metadata-scanner';
+import { GraphQLFactory } from '@nestjs/graphql';
+import { ResolversExplorerService } from '@nestjs/graphql/resolvers-explorer.service';
 import { graphiqlExpress, graphqlExpress } from 'apollo-server-express';
 import { AccountModule } from '../account/account.module';
-import { GraphQLFactory } from './graphql.factory';
 import { ResolveModule } from './resolver/resolver.module';
-import { ResolversExplorerService } from './resolvers-explorer.service';
 import { TokenMiddleware } from './token.middleware';
 
 @Module({
@@ -26,7 +26,6 @@ export class GraphQLModule implements NestModule {
       .forRoutes({ path: '/graphiql', method: RequestMethod.GET });
     consumer.apply([
       // TokenMiddleware,
-      // GraphQLMiddleware,
       graphqlExpress(req => ({ schema, rootValue: req })),
     ]).forRoutes({
       path: '/graphql',
