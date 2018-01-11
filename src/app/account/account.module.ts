@@ -8,7 +8,7 @@ import './user.resolver';
 
 @Module({
   modules: [ConfigModule, DeployerModule],
-  components: [AccountService, GrpcTransformService],
+  components: [AccountService],
   controllers: [AccountController],
   exports: [AccountService],
 })
