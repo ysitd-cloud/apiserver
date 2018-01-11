@@ -5,3 +5,7 @@ type User {
     avatarUrl: String
     apps: [App!]
 }
+
+extend type Query {
+    user(username: String!): User
+}

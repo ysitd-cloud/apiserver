@@ -3,11 +3,11 @@ import { ConfigModule } from '../config/config.module';
 import { DeployerModule } from '../deployer/deployer.module';
 import { AccountController } from './account.controller';
 import { AccountService } from './account.service';
-import './user.resolver';
+import { UserResolver } from './user.resolver';
 
 @Module({
   modules: [ConfigModule, DeployerModule],
-  components: [AccountService],
+  components: [AccountService, UserResolver],
   controllers: [AccountController],
   exports: [AccountService],
 })

@@ -1,4 +1,5 @@
 import { ApiModelProperty } from '@nestjs/swagger';
+import { IsString } from 'class-validator';
 import {
   Deployment as IDeployment,
   Environment,
@@ -8,22 +9,27 @@ import {
 } from './interfaces';
 
 class Deployment implements IDeployment {
+  @IsString()
   @ApiModelProperty({ required: true, description: 'Name of Docker Image' })
   readonly image: string;
 
+  @IsString()
   @ApiModelProperty({ required: true, description: 'Tag of Docker Image' })
   readonly tag: string;
 }
 
 class Network implements INetwork {
+  @IsString()
   @ApiModelProperty({required: true, description: 'Domain for exposing to internet'})
   readonly domain: string;
 }
 
 class EnvironmentParameter implements IEnvironmentParameter {
+  @IsString()
   @ApiModelProperty({required: true, description: 'Domain for exposing to internet'})
   readonly key: string;
 
+  @IsString()
   @ApiModelProperty({required: true, description: 'Domain for exposing to internet'})
   readonly value: string;
 }
@@ -32,9 +38,11 @@ export class Application implements UserApp {
   @ApiModelProperty()
   readonly id: string;
 
+  @IsString()
   @ApiModelProperty({ required: true, description: 'Owner of application' })
   readonly owner: string;
 
+  @IsString()
   @ApiModelProperty({ required: true, description: 'Display for user to remember' })
   readonly name: string;
 

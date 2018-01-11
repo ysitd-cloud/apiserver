@@ -20,3 +20,7 @@ type AppEnvironemntParameter {
 type AppNetwork {
     domain: String!
 }
+
+extend type Query {
+    app(id: String!): App
+}
