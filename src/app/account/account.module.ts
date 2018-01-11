@@ -4,6 +4,7 @@ import { DeployerModule } from '../deployer/deployer.module';
 import { AccountController } from './account.controller';
 import { AccountService } from './account.service';
 import { GrpcTransformService } from './grpc.transform.service';
+import './user.resolver';
 
 @Module({
   modules: [ConfigModule, DeployerModule],

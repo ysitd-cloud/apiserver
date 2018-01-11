@@ -1,25 +1,17 @@
-import { Component } from '@nestjs/common';
-import { IResolverObject } from 'graphql-tools/dist/Interfaces';
+import { Query, Resolver } from '@nestjs/graphql';
 import { AccountService } from '../../account/account.service';
 import { User } from '../../account/interfaces';
-import { RootResolver } from './interfaces';
 
-@Component()
-export class QueryResolver implements RootResolver {
-
+@Resolver('Query')
+export class QueryResolver {
   constructor(private readonly service: AccountService) {}
 
-  getResolver(): IResolverObject  {
-    return {
-      user: this.user.bind(this),
-      ping: this.ping.bind(this),
-    };
-  }
-
+  @Query()
   user(_, { username }: { username: string }): Promise<User> {
     return this.service.getUserInfo(username);
   }
 
+  @Query()
   ping(): string {
     return 'pong';
   }
