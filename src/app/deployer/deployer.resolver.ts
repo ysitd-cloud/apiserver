@@ -1,4 +1,4 @@
-import { Query, Resolver } from '@nestjs/graphql';
+import { Mutation, Query, Resolver} from '@nestjs/graphql';
 import { DeployerService } from './deployer.service';
 import { UserApp } from './interfaces';
 
@@ -9,5 +9,10 @@ export class DeployerResolver {
   @Query('app')
   async app(_, { id }: { id: string }): Promise<UserApp> {
     return this.service.getAppByID(id);
+  }
+
+  @Mutation()
+  async createApp(_, { app }: { app: UserApp }): Promise<boolean> {
+    return this.service.createApplication(app);
   }
 }

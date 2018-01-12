@@ -44,7 +44,7 @@ export class DeployerService {
 
   async getAppByUser(user: string): Promise<UserApp[]> {
     const resp = await this.getInstance().get(`/user/${user}/application`); ``;
-    return resp.data.map(fixApplication) as UserApp[];
+    return resp.data.map(fixApplication);
   }
 
   async getAppByID(id: string): Promise<UserApp> {

@@ -24,3 +24,29 @@ type AppNetwork {
 extend type Query {
     app(id: String!): App
 }
+
+type Mutation {
+    createApp(app: ApplicationInput!): Boolean!
+}
+
+input ApplicationInput {
+    owner: String!
+    name: String!
+    deployment: AppDeploymentInput!
+    environment: [AppEnvironemntParameterInput!]
+    network: AppNetworkInput!
+}
+
+input AppDeploymentInput {
+    image: String!
+    tag: String!
+}
+
+input AppEnvironemntParameterInput {
+    key: String!
+    value: String
+}
+
+input AppNetworkInput {
+    domain: String!
+}
