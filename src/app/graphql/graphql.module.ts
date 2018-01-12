@@ -21,15 +21,23 @@ export class GraphQLModule implements NestModule {
   configure(consumer: MiddlewaresConsumer): void {
     const typeDefs = this.factory.mergeTypesByPaths('./src/**/*.graphql');
     const schema = this.factory.createSchema({ typeDefs });
-    consumer
-      .apply(graphiqlExpress({ endpointURL: '/graphql' }))
-      .forRoutes({ path: '/graphiql', method: RequestMethod.GET });
-    consumer.apply([
-      // TokenMiddleware,
-      graphqlExpress(req => ({ schema, rootValue: req })),
-    ]).forRoutes({
-      path: '/graphql',
-      method: RequestMethod.ALL,
-    });
+    if (process.env.NODE_ENV !== 'production') {
+      consumer
+        .apply(graphiqlExpress({endpointURL: '/graphql'}))
+        .forRoutes({path: '/graphiql', method: RequestMethod.GET});
+      consumer.apply(graphqlExpress(req => ({ schema, rootValue: req })))
+        .forRoutes({
+        path: '/graphql',
+        method: RequestMethod.ALL,
+      });
+    } else {
+      consumer.apply([
+        TokenMiddleware,
+        graphqlExpress(req => ({ schema, rootValue: req })),
+      ]).forRoutes({
+        path: '/graphql',
+        method: RequestMethod.ALL,
+      });
+    }
   }
 }
