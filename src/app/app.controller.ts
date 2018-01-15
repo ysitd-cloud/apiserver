@@ -25,6 +25,7 @@ export class AppController {
         '/openapi',
 
         '/user',
+        '/app',
       ].sort(),
     };
   }
