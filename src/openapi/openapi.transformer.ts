@@ -95,7 +95,9 @@ export class OpenAPITransformer {
     }
 
     if ('parameters' in content && content.parameters) {
-      obj.parameters = content.parameters.map(this.transformParameter);
+      obj.parameters = content.parameters.filter(p => p.in !== 'body').map(this.transformParameter);
+      obj.requestBody = this.transformRequestBody(content.parameters.find(p => p.in === 'body'));
+
     }
 
     if ('security' in content) {
@@ -144,6 +146,22 @@ export class OpenAPITransformer {
         type: parameter.type,
       },
       in: parameter.in,
+    };
+  }
+
+  private transformRequestBody(parameter) {
+    if (!parameter) {
+      return parameter;
+    }
+    return {
+      required: parameter.required,
+      content: {
+        'application/json': {
+          schema: {
+            $ref: `#/components/schemas/${parameter.name}`,
+          },
+        },
+      },
     };
   }
 

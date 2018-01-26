@@ -71,7 +71,12 @@ export default class SwaggerTransformer {
     }
 
     if ('parameters' in operation) {
-      obj.parameters = operation.parameters;
+      obj.parameters = operation.parameters.map((parameter) => {
+        if (typeof parameter.type !== 'string') {
+          delete parameter.type;
+        }
+        return parameter;
+      });
     }
 
     if ('security' in operation) {

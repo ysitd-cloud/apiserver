@@ -33,7 +33,9 @@ export class OpenAPIModule {
 
     router.get('/swagger.yaml', (req, res) => {
       res.contentType('text/yaml');
-      const yaml = safeDump(swagger.createSwaggerObject(document, req.get('Host')));
+      const doc = swagger.createSwaggerObject(document, req.get('Host'));
+      const fix = JSON.parse(JSON.stringify(doc));
+      const yaml = safeDump(fix);
       res.end(yaml);
     });
 
@@ -44,7 +46,9 @@ export class OpenAPIModule {
 
     router.get('/openapi.yaml', (req, res) => {
       res.contentType('text/yaml');
-      const yaml = safeDump(transformer.createOpenAPIObject(document, req.get('Host')));
+      const doc = transformer.createOpenAPIObject(document, req.get('Host'));
+      const fix = JSON.parse(JSON.stringify(doc));
+      const yaml = safeDump(fix);
       res.end(yaml);
     });
 
