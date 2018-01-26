@@ -44,10 +44,7 @@ export class OpenAPITransformer {
   }
 
   private transformDefinition(definition) {
-    const required = Object.keys(definition.properties)
-      .filter(property => definition.properties[property].required);
-    return {
-      required,
+    const result: any = {
       properties: Object.keys(definition.properties).reduce((obj, name) => {
         const value = definition.properties[name];
         delete value.required;
@@ -72,6 +69,15 @@ export class OpenAPITransformer {
         return obj;
       }, {}),
     };
+
+    const required = Object.keys(definition.properties)
+      .filter(property => definition.properties[property].required);
+
+    if (required.length > 0) {
+      result.required = required;
+    }
+
+    return result;
   }
 
   private transformPath(content: { [key: string]: object }): object {
