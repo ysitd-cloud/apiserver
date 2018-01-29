@@ -29,7 +29,7 @@
     "js-yaml": "^3.10.0",
     "moment": "^2.20.1",
     "morgan": "^1.9.0",
-    "reflect-metadata": "^0.1.10",
+    "reflect-metadata": "0.1.10",
     "rxjs": "^5.4.3",
     "tslib": "^1.8.1",
     "ysitd-cloud-interfaces": "https://github.com/ysitd-cloud/grpc-schema.git#34a74f3c309844815fd39ee3c0cfc2cdd2cc87ee"
