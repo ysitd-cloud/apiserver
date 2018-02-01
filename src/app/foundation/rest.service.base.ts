@@ -15,6 +15,11 @@ export class RestServiceBase {
   }
 
   private getHostname(): string {
-    return this.config.get(this.hostnameKey);
+    const hostname = this.config.get(this.hostnameKey);
+    if (hostname.startsWith('http')) {
+      return hostname;
+    }
+
+    return `http://${hostname}`;
   }
 }
