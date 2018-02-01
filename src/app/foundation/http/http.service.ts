@@ -4,9 +4,13 @@ import { Observable } from 'rxjs';
 
 @Component()
 export class HttpService {
-  request(config: AxiosRequestConfig): Observable<AxiosResponse<any>> {
+  request(config: AxiosRequestConfig): Promise<AxiosResponse<any>> {
+    return axios(config);
+  }
+
+  request$(config: AxiosRequestConfig): Observable<AxiosResponse<any>> {
     return Observable.create((observer) => {
-      axios(config)
+      this.request(config)
         .then((resp) => {
           observer.next(resp);
           observer.complete();
