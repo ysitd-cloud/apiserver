@@ -12,7 +12,7 @@ import { TokenGuard } from './token.guard';
 @ApiUseTags('user')
 @ApiBearerAuth()
 @Controller('user')
-// @UseGuards(TokenGuard)
+@UseGuards(TokenGuard)
 export class AccountController {
   constructor(
     private readonly service: AccountService,
