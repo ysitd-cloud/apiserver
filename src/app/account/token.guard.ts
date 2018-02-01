@@ -1,13 +1,14 @@
 import { CanActivate, ExecutionContext, Guard } from '@nestjs/common';
 import { Request } from 'express';
 import * as moment from 'moment';
-import {AccountService} from './account.service';
+import { Observable } from 'rxjs';
+import { AccountService } from './account.service';
 
 @Guard()
 export class TokenGuard implements CanActivate {
   constructor(private readonly service: AccountService) {}
 
-  async canActivate(req: Request, context: ExecutionContext): Promise<boolean> {
+  canActivate(req: Request, context: ExecutionContext): boolean | Observable<boolean> {
     const header = req.get('Authorization');
     if (!header) {
       return false;
@@ -17,12 +18,15 @@ export class TokenGuard implements CanActivate {
       return false;
     }
 
-    const info = await this.service.getTokenInfo(token);
-    if (info !== null && (moment().isBefore(info.expire))) {
-      (req as any).token = info;
-      return true;
-    }
+    return this.service.getTokenInfo(token)
+      .take(1)
+      .map((info) => {
+        if (info !== null && (moment().isBefore(info.expire))) {
+          (req as any).token = info;
+          return true;
+        }
 
-    return false;
+        return false;
+      });
   }
 }
