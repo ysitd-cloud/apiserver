@@ -1,14 +1,17 @@
-import { Body, Controller, Get, HttpStatus, Param, Post, Res, UsePipes } from '@nestjs/common';
-import { ApiOperation, ApiResponse, ApiUseTags } from '@nestjs/swagger';
+import { Body, Controller, Get, HttpStatus, Param, Post, Res, UseGuards, UsePipes } from '@nestjs/common';
+import { ApiBearerAuth, ApiOperation, ApiResponse, ApiUseTags } from '@nestjs/swagger';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
+import { TokenGuard } from '../account/token.guard';
 import { DeployerService } from './deployer.service';
 import { UserApp } from './interfaces';
 import { Application } from './swagger';
 import { ValidatePipe } from './validate.pipe';
 
 @ApiUseTags('app')
+@ApiBearerAuth()
 @Controller('app')
+@UseGuards(TokenGuard)
 export class DeployerController {
   constructor(private readonly service: DeployerService) {}
 

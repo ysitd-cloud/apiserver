@@ -1,4 +1,4 @@
-import { Controller, Get, NotFoundException, Param, UseGuards } from '@nestjs/common';
+import { Controller, Get, Inject, NotFoundException, Param, UseGuards, forwardRef } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiResponse, ApiUseTags} from '@nestjs/swagger';
 import { Observable } from 'rxjs/Observable';
 import { DeployerService } from '../deployer/deployer.service';
@@ -15,6 +15,7 @@ import { TokenGuard } from './token.guard';
 export class AccountController {
   constructor(
     private readonly service: AccountService,
+    @Inject(forwardRef(() => DeployerService))
     private readonly deployer: DeployerService,
   ) {}
 
