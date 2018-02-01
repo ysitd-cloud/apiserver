@@ -1,10 +1,10 @@
-import { Body, Controller, Get, HttpStatus, Param, Post, Res, UseGuards, UsePipes } from '@nestjs/common';
+import { Body, Controller, Get, HttpStatus, Param, Post, Put, Res, UseGuards, UsePipes } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiResponse, ApiUseTags } from '@nestjs/swagger';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import { TokenGuard } from '../account/token.guard';
 import { DeployerService } from './deployer.service';
-import { UserApp } from './interfaces';
+import { Deployment, UserApp } from './interfaces';
 import { Application } from './swagger';
 import { ValidatePipe } from './validate.pipe';
 
@@ -43,6 +43,24 @@ export class DeployerController {
         }
         return Observable.of(null);
       });
+  }
+
+  @Put(':app/image')
+  @UsePipes(new ValidatePipe())
+  @ApiOperation({
+    title: 'Update Application Image',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Successful change the image',
+  })
+  updateImage(
+    @Param('app') id: string,
+    @Body() deployment: Deployment,
+    @Res() res,
+  ): Observable<boolean> {
+    return this.service.updateDeploymentImage(id, deployment)
+      .map(result => res.status(result ? HttpStatus.OK : HttpStatus.BAD_GATEWAY));
   }
 
 }

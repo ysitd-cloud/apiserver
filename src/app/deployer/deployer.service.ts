@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { ConfigService } from '../foundation/config/config.service';
 import { HttpService } from '../foundation/http/http.service';
 import { RestServiceBase } from '../foundation/rest.service.base';
-import { Environment, UserApp } from './interfaces';
+import { Deployment, Environment, UserApp } from './interfaces';
 
 @Component()
 export class DeployerService extends RestServiceBase {
@@ -54,5 +54,15 @@ export class DeployerService extends RestServiceBase {
       url: `/application/${id}`,
     })
       .map(resp => DeployerService.fixApplication(resp.data));
+  }
+
+  updateDeploymentImage(id: string, deployment: Deployment): Observable<boolean> {
+    return this.http.request$({
+      method: 'put',
+      baseURL: this.getBasePath(),
+      url: `/application/${id}/image`,
+      data: deployment,
+    })
+      .map(resp => resp.data.success as boolean);
   }
 }

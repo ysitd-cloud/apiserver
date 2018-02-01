@@ -27,6 +27,7 @@ extend type Query {
 
 type Mutation {
     createApp(app: ApplicationInput!): Boolean!
+    updateImage(id: String!, deployment: AppDeploymentInput!): Boolean!
 }
 
 input ApplicationInput {

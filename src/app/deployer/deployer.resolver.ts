@@ -1,19 +1,26 @@
-import { Mutation, Query, Resolver} from '@nestjs/graphql';
-import { Observable } from 'rxjs/Observable';
+import { Mutation, Query, Resolver } from '@nestjs/graphql';
+import { ResolverBase } from '../foundation/resolver.base';
 import { DeployerService } from './deployer.service';
-import { UserApp } from './interfaces';
+import { Deployment, UserApp } from './interfaces';
 
 @Resolver('App')
-export class DeployerResolver {
-  constructor(private readonly service: DeployerService) {}
+export class DeployerResolver extends ResolverBase {
+  constructor(private readonly service: DeployerService) {
+    super();
+  }
 
   @Query('app')
-  app(_, { id }: { id: string }): Observable<UserApp> {
-    return this.service.getAppByID(id);
+  app(_, { id }: { id: string }): Promise<UserApp> {
+    return this.wrap(this.service.getAppByID(id));
   }
 
   @Mutation()
-  createApp(_, { app }: { app: UserApp }): Observable<boolean> {
-    return this.service.createApplication(app);
+  createApp(_, { app }: { app: UserApp }): Promise<boolean> {
+    return this.wrap(this.service.createApplication(app));
+  }
+
+  @Mutation()
+  updateImage(_, { id, deployment }: { id: string, deployment: Deployment }): Promise<boolean> {
+    return this.wrap(this.service.updateDeploymentImage(id, deployment));
   }
 }
