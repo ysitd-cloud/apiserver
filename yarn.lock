@@ -571,11 +571,17 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
-class-validator@0.7.3, class-validator@^0.7.3:
+class-validator@0.7.3:
   version "0.7.3"
   resolved "https://registry.yarnpkg.com/class-validator/-/class-validator-0.7.3.tgz#3c2821b8cf35fd8d5f4fcb8063bc57fb50049e7e"
   dependencies:
     validator "^7.0.0"
+
+class-validator@^0.8.0:
+  version "0.8.1"
+  resolved "https://registry.yarnpkg.com/class-validator/-/class-validator-0.8.1.tgz#f5efd5c613927e3c2f68692e8f14d53a2644fb2f"
+  dependencies:
+    validator "9.2.0"
 
 cli-boxes@^1.0.0:
   version "1.0.0"
@@ -2898,6 +2904,10 @@ v8flags@^3.0.0:
   resolved "https://registry.yarnpkg.com/v8flags/-/v8flags-3.0.1.tgz#dce8fc379c17d9f2c9e9ed78d89ce00052b1b76b"
   dependencies:
     homedir-polyfill "^1.0.1"
+
+validator@9.2.0:
+  version "9.2.0"
+  resolved "https://registry.yarnpkg.com/validator/-/validator-9.2.0.tgz#ad216eed5f37cac31a6fe00ceab1f6b88bded03e"
 
 validator@^7.0.0:
   version "7.2.0"
