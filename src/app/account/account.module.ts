@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '../foundation/config/config.module';
 import { DeployerModule } from '../deployer/deployer.module';
+import { ConfigModule } from '../foundation/config/config.module';
 import { AccountController } from './account.controller';
 import { AccountService } from './account.service';
 import { UserResolver } from './user.resolver';
