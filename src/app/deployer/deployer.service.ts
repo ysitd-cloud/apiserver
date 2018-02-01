@@ -1,72 +1,58 @@
 import { Component } from '@nestjs/common';
-import axios, { AxiosInstance } from 'axios';
+import { Observable } from 'rxjs';
 import { ConfigService } from '../foundation/config/config.service';
+import { HttpService } from '../foundation/http/http.service';
+import { RestServiceBase } from '../foundation/rest.service.base';
 import { Environment, UserApp } from './interfaces';
 
-function fixEnvironment(environment: {[key: string]: string}): Environment {
-  return Object.keys(environment).map(key => ({
-    key,
-    value: environment[key],
-  }));
-}
-
-function fixApplication(app): UserApp {
-  return {
-    ...app,
-    environment: fixEnvironment(app.environment),
-  } as UserApp;
-}
-
-function convertToRpcEnvironment(env: Environment) {
-  return env.reduce((obj, e) => {
-    obj[e.key] = e.value;
-    return obj;
-  }, {});
-}
-
-function convertToRpcApplication(app: UserApp) {
-  return {
-    ...app,
-    environment: convertToRpcEnvironment(app.environment),
-  };
-}
-
 @Component()
-export class DeployerService {
-  private instance: AxiosInstance;
-
-  constructor(private readonly config: ConfigService) {}
-
-  async createApplication(app: UserApp): Promise<boolean> {
-    const resp = await this.getInstance().post('/application', convertToRpcApplication(app));
-    return resp.data.success;
+export class DeployerService extends RestServiceBase {
+  constructor(
+    config: ConfigService,
+    http: HttpService,
+  ) {
+    super(config, http, 'deployer.endpoint', '/api/v1');
   }
 
-  async getAppByUser(user: string): Promise<UserApp[]> {
-    const resp = await this.getInstance().get(`/user/${user}/application`); ``;
-    return resp.data.map(fixApplication);
+  static fixApplication(app): UserApp {
+    return {
+      ...app,
+      environment: DeployerService.fixEnvironment(app.environment),
+    } as UserApp;
   }
 
-  async getAppByID(id: string): Promise<UserApp> {
-    const resp = await this.getInstance().get(`/application/${id}`);
-    return fixApplication(resp.data);
+  static fixEnvironment(environment: {[key: string]: string}): Environment {
+    return Object.keys(environment).map(key => ({
+      key,
+      value: environment[key],
+    }));
   }
 
-  private getInstance(): AxiosInstance {
-    if (!this.instance) {
-      this.instance = axios.create({
-        baseURL: this.getEndpoint(),
-        validateStatus(status) {
-          return status >= 200 && status < 600;
-        },
-      });
-    }
-
-    return this.instance;
+  createApplication(app: UserApp): Observable<boolean> {
+    return this.http.request$({
+      baseURL: this.getBasePath(),
+      method: 'post',
+      url: '/application',
+      data: app,
+    })
+      .map(resp => resp.data.success);
   }
 
-  private getEndpoint() {
-    const endpoint = this.config.get('deployer.endpoint');
-    return `${endpoint}/api/v1`;
+  getAppByUser(user: string): Observable<UserApp[]> {
+    return this.http.request$({
+      method: 'get',
+      baseURL: this.getBasePath(),
+      url: `/user/${user}/application`,
+    })
+      .map(resp => resp.data.map(DeployerService.fixApplication));
+  }
+
+  getAppByID(id: string): Observable<UserApp> {
+    return this.http.request$({
+      method: 'get',
+      baseURL: this.getBasePath(),
+      url: `/application/${id}`,
+    })
+      .map(resp => DeployerService.fixApplication(resp.data));
   }
 }

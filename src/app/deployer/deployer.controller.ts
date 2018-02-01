@@ -1,5 +1,6 @@
-import { BadGatewayException, Body, Controller, Get, HttpCode, HttpStatus, Param, Post, UsePipes } from '@nestjs/common';
-import { ApiImplicitBody, ApiOperation, ApiResponse, ApiUseTags } from '@nestjs/swagger';
+import { Body, Controller, Get, HttpStatus, Param, Post, Res, UsePipes } from '@nestjs/common';
+import { ApiOperation, ApiResponse, ApiUseTags } from '@nestjs/swagger';
+import { Observable } from 'rxjs';
 import { DeployerService } from './deployer.service';
 import { UserApp } from './interfaces';
 import { Application } from './swagger';
@@ -15,11 +16,10 @@ export class DeployerController {
     title: 'Get Application By ID',
   })
   @ApiResponse({ status: 200, description: 'Successful get application', type: Application })
-  async getAppByID(@Param('app') app: string): Promise<UserApp> {
+  getAppByID(@Param('app') app: string): Observable<UserApp> {
     return this.service.getAppByID(app);
   }
 
-  @HttpCode(HttpStatus.CREATED)
   @Post()
   @UsePipes(new ValidatePipe())
   @ApiOperation({
@@ -29,10 +29,16 @@ export class DeployerController {
     status: 201,
     description: 'Successful create application',
   })
-  async createApp(@Body() app: Application) {
-    if (!this.service.createApplication(app)) {
-      throw new BadGatewayException('Fail to create');
-    }
+  createApp(@Body() app: Application, @Res() res): Observable<any> {
+    return this.service.createApplication(app)
+      .map(result => {
+        if (!result) {
+          res.status(HttpStatus.BAD_GATEWAY);
+        } else {
+          res.status(HttpStatus.CREATED);
+        }
+        return Observable.of(null);
+      });
   }
 
 }

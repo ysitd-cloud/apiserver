@@ -1,5 +1,7 @@
 import { Controller, Get, NotFoundException, Param, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiResponse, ApiUseTags} from '@nestjs/swagger';
+import { Observable } from 'rxjs';
+import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import { DeployerService } from '../deployer/deployer.service';
 import { UserApp } from '../deployer/interfaces';
 import { Application } from '../deployer/swagger';
@@ -23,13 +25,15 @@ export class AccountController {
   })
   @ApiResponse({ status: 200, description: 'Get user information', type: User })
   @ApiResponse({ status: 404, description: 'User not exists' })
-  async getUserInfo(@Param('username') username: string) {
-    const user = await this.service.getUserInfo(username);
-    if (user !== null) {
-      return user;
-    } else {
-      throw new NotFoundException();
-    }
+  getUserInfo(@Param('username') username: string): Observable<User | ErrorObservable> {
+    return this.service.getUserInfo(username)
+      .map((user) => {
+        if (user !== null) {
+          return user;
+        } else {
+          return Observable.throw(new NotFoundException());
+        }
+      });
   }
 
   @Get(':username/app')
@@ -37,7 +41,7 @@ export class AccountController {
     title: 'Get app by username',
   })
   @ApiResponse({ status: 200, description: 'Get list of application', isArray: true, type: Application })
-  async getApplications(@Param('username') username: string): Promise<UserApp[]> {
+  getApplications(@Param('username') username: string): Observable<UserApp[]> {
     return this.deployer.getAppByUser(username);
   }
 }
