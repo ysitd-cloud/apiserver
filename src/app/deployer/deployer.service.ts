@@ -1,6 +1,7 @@
 import { Component } from '@nestjs/common';
-import axios, { AxiosInstance } from 'axios';
+import { Observable } from 'rxjs';
 import { ConfigService } from '../foundation/config/config.service';
+import { HttpService } from '../foundation/http/http.service';
 import { Environment, UserApp } from './interfaces';
 
 function fixEnvironment(environment: {[key: string]: string}): Environment {
@@ -17,52 +18,39 @@ function fixApplication(app): UserApp {
   } as UserApp;
 }
 
-function convertToRpcEnvironment(env: Environment) {
-  return env.reduce((obj, e) => {
-    obj[e.key] = e.value;
-    return obj;
-  }, {});
-}
-
-function convertToRpcApplication(app: UserApp) {
-  return {
-    ...app,
-    environment: convertToRpcEnvironment(app.environment),
-  };
-}
-
 @Component()
 export class DeployerService {
-  private instance: AxiosInstance;
+  constructor(
+    private readonly config: ConfigService,
+    private readonly http: HttpService,
+  ) {}
 
-  constructor(private readonly config: ConfigService) {}
-
-  async createApplication(app: UserApp): Promise<boolean> {
-    const resp = await this.getInstance().post('/application', convertToRpcApplication(app));
-    return resp.data.success;
+  createApplication(app: UserApp): Observable<boolean> {
+    return this.http.request$({
+      baseURL: this.getEndpoint(),
+      method: 'post',
+      url: '/application',
+      data: app,
+    })
+      .map(resp => resp.data.success);
   }
 
-  async getAppByUser(user: string): Promise<UserApp[]> {
-    const resp = await this.getInstance().get(`/user/${user}/application`); ``;
-    return resp.data.map(fixApplication);
+  getAppByUser(user: string): Observable<UserApp[]> {
+    return this.http.request$({
+      method: 'get',
+      baseURL: this.getEndpoint(),
+      url: `/user/${user}/application`,
+    })
+      .map(resp => resp.data.map(fixApplication));
   }
 
-  async getAppByID(id: string): Promise<UserApp> {
-    const resp = await this.getInstance().get(`/application/${id}`);
-    return fixApplication(resp.data);
-  }
-
-  private getInstance(): AxiosInstance {
-    if (!this.instance) {
-      this.instance = axios.create({
-        baseURL: this.getEndpoint(),
-        validateStatus(status) {
-          return status >= 200 && status < 600;
-        },
-      });
-    }
-
-    return this.instance;
+  getAppByID(id: string): Observable<UserApp> {
+    return this.http.request$({
+      method: 'get',
+      baseURL: this.getEndpoint(),
+      url: `/application/${id}`,
+    })
+      .map(resp => fixApplication(resp.data));
   }
 
   private getEndpoint() {

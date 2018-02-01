@@ -1,4 +1,5 @@
 import { Mutation, Query, Resolver} from '@nestjs/graphql';
+import { Observable } from 'rxjs';
 import { DeployerService } from './deployer.service';
 import { UserApp } from './interfaces';
 
@@ -7,7 +8,7 @@ export class DeployerResolver {
   constructor(private readonly service: DeployerService) {}
 
   @Query('app')
-  async app(_, { id }: { id: string }): Promise<UserApp> {
+  app(_, { id }: { id: string }): Observable<UserApp> {
     return this.service.getAppByID(id);
   }
 

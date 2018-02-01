@@ -1,8 +1,9 @@
-import {Query, ResolveProperty, Resolver} from '@nestjs/graphql';
+import { Query, ResolveProperty, Resolver } from '@nestjs/graphql';
+import { Observable } from 'rxjs';
 import { DeployerService } from '../deployer/deployer.service';
 import { UserApp } from '../deployer/interfaces';
-import {AccountService} from './account.service';
-import {User} from './interfaces';
+import { AccountService } from './account.service';
+import { User } from './interfaces';
 
 @Resolver('User')
 export class UserResolver {
@@ -14,7 +15,7 @@ export class UserResolver {
   }
 
   @ResolveProperty()
-  apps({ username }: { username: string }): Promise<UserApp[]> {
+  apps({ username }: { username: string }): Observable<UserApp[]> {
     return this.deployer.getAppByUser(username);
   }
 }
