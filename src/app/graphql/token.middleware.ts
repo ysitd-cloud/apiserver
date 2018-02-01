@@ -20,8 +20,9 @@ export class TokenMiddleware implements NestMiddleware {
       }
 
       this.service.getTokenInfo(token)
-        .then(info => info !== null && (moment().isBefore(info.expire)))
-        .then(result => result ? next() : next(new UnauthorizedException()));
+        .take(1)
+        .map(info => info !== null && (moment().isBefore(info.expire)))
+        .map(result => result ? next() : next(new UnauthorizedException()));
     };
   }
 }
