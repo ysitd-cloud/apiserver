@@ -1,7 +1,7 @@
 import { CanActivate, ExecutionContext, Guard } from '@nestjs/common';
 import { Request } from 'express';
 import * as moment from 'moment';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 import { AccountService } from './account.service';
 
 @Guard()

@@ -1,7 +1,7 @@
 import { Component } from '@nestjs/common';
-import axios from 'axios';
 import * as moment from 'moment';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
 import { ConfigService } from '../foundation/config/config.service';
 import { HttpService } from '../foundation/http/http.service';
 import { RestServiceBase } from '../foundation/rest.service.base';
@@ -45,7 +45,6 @@ export class AccountService extends RestServiceBase {
       baseURL: this.getBasePath(),
       url: `/token/${code}`,
     })
-      .take(1)
       .map(resp => resp.data)
       .map((data) => {
         if (!data.exists) {

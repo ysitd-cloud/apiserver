@@ -1,6 +1,7 @@
 import { Body, Controller, Get, HttpStatus, Param, Post, Res, UsePipes } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiUseTags } from '@nestjs/swagger';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
 import { DeployerService } from './deployer.service';
 import { UserApp } from './interfaces';
 import { Application } from './swagger';
