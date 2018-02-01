@@ -8,7 +8,7 @@ import {
   UserApp,
 } from './interfaces';
 
-class Deployment implements IDeployment {
+export class Deployment implements IDeployment {
   @IsString()
   @ApiModelProperty({ required: true, description: 'Name of Docker Image' })
   readonly image: string;

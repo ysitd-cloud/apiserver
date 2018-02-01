@@ -4,8 +4,8 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import { TokenGuard } from '../account/token.guard';
 import { DeployerService } from './deployer.service';
-import { Deployment, UserApp } from './interfaces';
-import { Application } from './swagger';
+import { UserApp } from './interfaces';
+import { Application, Deployment } from './swagger';
 import { ValidatePipe } from './validate.pipe';
 
 @ApiUseTags('app')
