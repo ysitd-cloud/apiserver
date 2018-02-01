@@ -1,6 +1,7 @@
 import { Controller, Get, NotFoundException, Param, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiResponse, ApiUseTags} from '@nestjs/swagger';
 import { Observable } from 'rxjs';
+import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import { DeployerService } from '../deployer/deployer.service';
 import { UserApp } from '../deployer/interfaces';
 import { Application } from '../deployer/swagger';
@@ -11,7 +12,7 @@ import { TokenGuard } from './token.guard';
 @ApiUseTags('user')
 @ApiBearerAuth()
 @Controller('user')
-@UseGuards(TokenGuard)
+// @UseGuards(TokenGuard)
 export class AccountController {
   constructor(
     private readonly service: AccountService,
@@ -24,13 +25,15 @@ export class AccountController {
   })
   @ApiResponse({ status: 200, description: 'Get user information', type: User })
   @ApiResponse({ status: 404, description: 'User not exists' })
-  async getUserInfo(@Param('username') username: string) {
-    const user = await this.service.getUserInfo(username);
-    if (user !== null) {
-      return user;
-    } else {
-      throw new NotFoundException();
-    }
+  getUserInfo(@Param('username') username: string): Observable<User | ErrorObservable> {
+    return this.service.getUserInfo(username)
+      .map((user) => {
+        if (user !== null) {
+          return user;
+        } else {
+          return Observable.throw(new NotFoundException());
+        }
+      });
   }
 
   @Get(':username/app')
