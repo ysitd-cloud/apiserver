@@ -1,6 +1,6 @@
 import { Component } from '@nestjs/common';
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 
 @Component()
 export class HttpService {
