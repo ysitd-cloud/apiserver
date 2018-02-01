@@ -5,8 +5,8 @@ import { UserApp } from './interfaces';
 import { Application } from './swagger';
 import { ValidatePipe } from './validate.pipe';
 
-@ApiUseTags('apps')
-@Controller('apps')
+@ApiUseTags('app')
+@Controller('app')
 export class DeployerController {
   constructor(private readonly service: DeployerService) {}
 
