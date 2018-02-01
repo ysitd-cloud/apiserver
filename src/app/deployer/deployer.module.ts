@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '../config/config.module';
+import { ConfigModule } from '../foundation/config/config.module';
 import { DeployerController } from './deployer.controller';
 import { DeployerResolver } from './deployer.resolver';
 import { DeployerService } from './deployer.service';

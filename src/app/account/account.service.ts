@@ -1,7 +1,7 @@
 import { Component } from '@nestjs/common';
 import axios from 'axios';
 import * as moment from 'moment';
-import { ConfigService } from '../config/config.service';
+import { ConfigService } from '../foundation/config/config.service';
 import { Token as IToken, User as IUser } from './interfaces';
 
 @Component()

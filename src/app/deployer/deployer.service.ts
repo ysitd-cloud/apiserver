@@ -1,6 +1,6 @@
 import { Component } from '@nestjs/common';
 import axios, { AxiosInstance } from 'axios';
-import { ConfigService } from '../config/config.service';
+import { ConfigService } from '../foundation/config/config.service';
 import {Environment, EnvironmentParameter, UserApp} from './interfaces';
 
 function fixEnvironment(environment: {[key: string]: string}): Environment {
