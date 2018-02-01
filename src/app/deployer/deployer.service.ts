@@ -1,5 +1,5 @@
 import { Component } from '@nestjs/common';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 import { ConfigService } from '../foundation/config/config.service';
 import { HttpService } from '../foundation/http/http.service';
 import { RestServiceBase } from '../foundation/rest.service.base';

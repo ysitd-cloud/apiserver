@@ -1,5 +1,5 @@
 import { Mutation, Query, Resolver} from '@nestjs/graphql';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 import { DeployerService } from './deployer.service';
 import { UserApp } from './interfaces';
 
@@ -13,7 +13,7 @@ export class DeployerResolver {
   }
 
   @Mutation()
-  async createApp(_, { app }: { app: UserApp }): Promise<boolean> {
+  createApp(_, { app }: { app: UserApp }): Observable<boolean> {
     return this.service.createApplication(app);
   }
 }
