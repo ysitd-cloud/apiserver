@@ -2987,9 +2987,9 @@ yn@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/yn/-/yn-2.0.0.tgz#e5adabc8acf408f6385fc76495684c88e6af689a"
 
-"ysitd-cloud-interfaces@https://github.com/ysitd-cloud/grpc-schema.git#34a74f3c309844815fd39ee3c0cfc2cdd2cc87ee":
+"ysitd-cloud-interfaces@https://github.com/ysitd-cloud/grpc-schema.git#b71fc73afa43723a3ca56d2219057c3ba1470f9e":
   version "1.0.0"
-  resolved "https://github.com/ysitd-cloud/grpc-schema.git#34a74f3c309844815fd39ee3c0cfc2cdd2cc87ee"
+  resolved "https://github.com/ysitd-cloud/grpc-schema.git#b71fc73afa43723a3ca56d2219057c3ba1470f9e"
 
 zen-observable@^0.6.0:
   version "0.6.1"
