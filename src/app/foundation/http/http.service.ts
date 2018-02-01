@@ -1,17 +1,13 @@
 import { Component, Inject } from '@nestjs/common';
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
+import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { Observable } from 'rxjs/Observable';
 
 @Component()
 export class HttpService {
-  constructor(@Inject('client') private readonly client: AxiosInstance = null) {
-    if (this.client === null) {
-      this.client = axios.create();
-    }
-  }
+  constructor(@Inject('client') private readonly client: AxiosInstance) {}
 
   request(config: AxiosRequestConfig): Promise<AxiosResponse<any>> {
-    return axios(config);
+    return this.client.request(config);
   }
 
   request$(config: AxiosRequestConfig): Observable<AxiosResponse<any>> {

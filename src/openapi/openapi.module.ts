@@ -27,26 +27,26 @@ export class OpenAPIModule {
     });
 
     router.get('/swagger.json', (req, res) => {
-      res.json(swagger.createSwaggerObject(document, req.get('Host')));
+      res.json(swagger.createSwaggerObject(document, req.get('Host') || 'localhost'));
       res.end();
     });
 
     router.get('/swagger.yaml', (req, res) => {
       res.contentType('text/yaml');
-      const doc = swagger.createSwaggerObject(document, req.get('Host'));
+      const doc = swagger.createSwaggerObject(document, req.get('Host') || 'localhost');
       const fix = JSON.parse(JSON.stringify(doc));
       const yaml = safeDump(fix);
       res.end(yaml);
     });
 
     router.get('/openapi.json', (req, res) => {
-      res.json(transformer.createOpenAPIObject(document, req.get('Host')));
+      res.json(transformer.createOpenAPIObject(document, req.get('Host') || 'localhost'));
       res.end();
     });
 
     router.get('/openapi.yaml', (req, res) => {
       res.contentType('text/yaml');
-      const doc = transformer.createOpenAPIObject(document, req.get('Host'));
+      const doc = transformer.createOpenAPIObject(document, req.get('Host') || 'localhost');
       const fix = JSON.parse(JSON.stringify(doc));
       const yaml = safeDump(fix);
       res.end(yaml);
